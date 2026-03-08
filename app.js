@@ -1,4 +1,7 @@
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+import { OrbitControls } from 
+"https://unpkg.com/three@0.160.0/examples/jsm/controls/OrbitControls.js";
+
 
 const scene = new THREE.Scene()
 
@@ -27,8 +30,15 @@ scene.add(cube)
 const renderer = new THREE.WebGLRenderer()
 
 renderer.setSize(window.innerWidth , window.innerHeight)
-
 document.body.appendChild(renderer.domElement)
+
+const controls = new OrbitControls(camera, renderer.domElement)
+controls.enableDamping = true
+
+
+
+
+
 
 let direction = 1 
 
@@ -45,6 +55,10 @@ function animate ()
         direction *= -1
     }
 
+    cube.material.color.set(Math.random() * 0xffffff)
+    controls.update()
     renderer.render(scene, camera)
+
+
 }
 animate( )
